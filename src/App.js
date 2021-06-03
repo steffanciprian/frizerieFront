@@ -1,21 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://foarfecasibriciul.com/?gclid=Cj0KCQjw--GFBhDeARIsACH_kdZksAXwTCAkMo4T8uowq9_DDQ6UdVWLfj7Ff3Qbhx9qgjCgxDyRru8aArU1EALw_wcB"
           target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+          rel="noopener noreferrer">
+          Asa trebuie sa iasa aplicatia
         </a>
       </header>
     </div>
