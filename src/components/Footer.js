@@ -1,6 +1,5 @@
 import React from "react";
-import {FacebookLoginButton, InstagramLoginButton} from "react-social-login-buttons";
-import {Facebook, Instagram, Link, Search} from "@material-ui/icons";
+import {Facebook, Instagram} from "@material-ui/icons";
 import IconButton from '@material-ui/core/IconButton';
 
 const Footer = () => {
@@ -13,7 +12,7 @@ const Footer = () => {
 
             </div>
             <div style={{flexDirection: 'row'}}>
-                <IconButton >
+                <IconButton>
                     <Facebook />
                 </IconButton>
                 <IconButton>
