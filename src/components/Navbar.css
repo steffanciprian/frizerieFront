@@ -1,15 +1,24 @@
 .navbar {
     background-color: transparent;
-    position: fixed;
     top: 0;
+    position: absolute;
     width: 100%;
     z-index: 100;
-    margin-top: 20px;
-    margin-right: 100px;
+    margin-top: 30px;
     text-align: right;
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
 }
 
 .span:hover {
     cursor: pointer;
+    color: darkgrey;
+}
+
+.span {
+    margin-right: 30px;
+    color: black;
+    text-decoration: transparent;
 }
 

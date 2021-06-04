@@ -21,16 +21,39 @@
 .button-container {
     background: transparent;
     border-radius: 200px;
+    height: 45px;
+    width: 185px;
+    border: solid;
 }
 
-.button:hover {
+.button-container:hover {
     cursor: pointer;
+    background-color: white;
 }
 
 .button {
     background: transparent;
     color: white;
-    border-color: transparent;
     font-size: 15px;
-    font-weight: bolder;
+    font-weight: bold;
+    border: solid;
+    border-radius: 30px;
+    height: 40px;
+    width: 180px;
+}
+
+.button:hover {
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border-color: white;
+    -webkit-transition: transform 0.4s ease-in-out;
+    -moz-transition: transform 0.4s ease-in-out;
+    -o-transition: transform 0.4s ease-in-out;
+    transition: transform 0.4s ease-in-out;
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
 }

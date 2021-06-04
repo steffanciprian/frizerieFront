@@ -1,43 +1,38 @@
-import React, {Component} from "react";
+import React from "react";
 import {Navbar} from 'react-bootstrap';
 import "./Navbar.css"
+import {useHistory} from "react-router-dom";
 
-class NavbarComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            frizeri: [],
-        }
-    }
+const NavbarComponent = () => {
+    const history = useHistory();
+    return (
+        <>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <div className="navbar">
+                                <span
+                                    className="span"
+                                    onClick={() => console.log('ciprian')}
+                                >PROGRAMEAZA-TE</span>
 
-    render() {
-        return (
-            <>
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <div className="navbar">
-                            <span
-                                className="span"
-                                style={{fontSize: 15, fontWeight: 'bold', margin: 10, color: 'black'}}
-                                onClick={() => console.log("ceva")}>PROGRAMEAZA-TE</span>
-                            <span
-                                className="span"
-                                style={{fontSize: 15, fontWeight: 'bold', margin: 10, color: 'black'}}
-                                onClick={() => console.log("ceva")}>PRETURI</span>
-                            <span
-                                className="span"
-                                style={{fontSize: 15, fontWeight: 'bold', margin: 10, color: 'black'}}
-                                onClick={() => console.log("ceva")}>LOCALIZARE</span>
-                            <span
-                                className="span"
-                                style={{fontSize: 15, fontWeight: 'bold', margin: 10, color: 'black'}}
-                                onClick={() => console.log("ceva")}>ARTICOLE</span>
-                        </div>
-                    </Navbar.Collapse>
-                </Navbar>
-            </>
-        )
-    }
+                        <span
+                            className="span"
+                            onClick={() =>
+                                history.push('preturi')}
+                        >PRETURI</span>
+                        <span
+                            className="span"
+                            onClick={() => console.log('ciprian')}
+                        >LOCALIZARE</span>
+                        <span
+                            className="span"
+                            onClick={() => console.log('ciprian')}
+                        >ARTICOLE</span>
+                    </div>
+                </Navbar.Collapse>
+            </Navbar>
+        </>
+    )
 }
 
 export default NavbarComponent;
