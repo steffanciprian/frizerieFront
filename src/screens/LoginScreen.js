@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-class HomeScreen extends Component {
+class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,4 +20,4 @@ class HomeScreen extends Component {
     }
 }
 
-export default HomeScreen;
+export default LoginScreen;

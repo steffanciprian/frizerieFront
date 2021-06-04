@@ -1,0 +1,15 @@
+.navbar {
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    margin-top: 20px;
+    margin-right: 100px;
+    text-align: right;
+}
+
+.span:hover {
+    cursor: pointer;
+}
+
