@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.divider {
+    border-left: 1px solid black;
+}
+
+.politica:hover {
+    cursor: pointer;
+}

@@ -10,6 +10,9 @@ const PreturiScreen = () => {
                 className="primulDiv"
                 style={{
                     backgroundImage: 'url("https://wallpapercave.com/wp/wp1946275.jpg")',
+                    width: window.innerWidth,
+                    top: 0,
+
                 }}>
                 <h1> PRETURI </h1>
                 <p>Misiunea noastra este simpla: servicii de cea mai buna calitate la preturi pe <br/> care sa ti le
