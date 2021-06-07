@@ -12,7 +12,8 @@ const NavbarComponent = () => {
                     <div className="navbar">
                                 <span
                                     className="span"
-                                    onClick={() => console.log('ciprian')}
+                                    onClick={() =>
+                                        history.push('programare')}
                                 >PROGRAMEAZA-TE</span>
 
                         <span

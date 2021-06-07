@@ -9,6 +9,7 @@ import PreturiScreen from "./screens/PreturiScreen";
 import NavbarComponent from "./components/NavbarComponent";
 import {Routes} from "./Routes";
 import Footer from "./components/Footer";
+import ProgramareScreen from "./screens/ProgramareScreen";
 
 ReactDOM.render(
     <BrowserRouter>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Switch>
             <Route exact path="/" component={App}/>
             <Route exact path="/preturi" component={PreturiScreen}/>
+            <Route exact path="/programare" component={ProgramareScreen}/>
         </Switch>
         <Footer/>
     </BrowserRouter>,
