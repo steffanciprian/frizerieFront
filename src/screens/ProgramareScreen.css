@@ -1,0 +1,12 @@
+.container-for-each-serviciu {
+    width: 40vw;
+    /*border: solid 1px cadetblue;*/
+    display: flex;
+    justify-content: space-between;
+}
+
+.flat-list-container :hover {
+    cursor: pointer;
+    color: cadetblue;
+
+}

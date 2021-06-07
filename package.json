@@ -7,7 +7,9 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "antd": "^4.16.1",
+    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "cors": "^2.8.5",
     "flatlist-react": "^1.5.0",
     "mdbreact": "^5.0.2",
     "react": "^17.0.2",
@@ -50,5 +52,6 @@
     "@material-ui/icons": "^4.11.2",
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

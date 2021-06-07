@@ -1,17 +1,44 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {withRouter} from "react-router";
 import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
 import FlatList from 'flatlist-react';
+import axios from 'axios'
+import './ProgramareScreen.css'
 
 const ProgramareScreen = () => {
+    const [servicii, setServicii] = useState([]),
+        [nameStep1, setNameStep1] = useState('Servicii'),
+        [nameStep2, setNameStep2] = useState('Stylist'),
+        [nameStep3, setNameStep3] = useState('Date'),
+        [nameStep4, setNameStep4] = useState('Your info'),
+        [nameStep5, setNameStep5] = useState('Confirm'),
+        [nameServiciu, setNameServiciu] = useState('');
+
+    //fetch din backend pentru recuperare de servicii
+    useEffect(() => {
+        const getServiciiFromBackend = async () => {
+            const result = await axios(
+                'http://localhost:8080/servicii',
+            );
+
+            console.log(result)
+            setServicii(result.data);
+        }
+        getServiciiFromBackend();
+
+    }, []);
+
+
 
     //functie pentru renderuit serviciile
-    const renderServiciu = (serviciu, idServiciu) => {
+    const renderServiciu = serviciu => {
         return (
-            <li key={idServiciu}>
-                <b>{serviciu.name} </b> (<span>{serviciu.pret}</span>)
-            </li>
+            <div className='container-for-each-serviciu' onClick={() => setNameServiciu(serviciu.name)}>
+                <p style={{margin: 10, fontSize: 15}}>{serviciu.name}</p>
+                <p style={{margin: 10, fontSize: 15}}>{serviciu.pret}</p>
+            </div>
+
         );
     }
 
@@ -25,10 +52,17 @@ const ProgramareScreen = () => {
     // setup step validators, will be called before proceeding to the next step
     function step2Validator() {
         // return a boolean
+        console.log(nameServiciu)
+        setNameStep1(nameServiciu)
+        console.log(nameServiciu)
+
+        return true;
     }
 
     function step3Validator() {
         // return a boolean
+        setNameStep1(nameServiciu)
+        return true;
     }
 
     function step4Validator() {
@@ -46,57 +80,59 @@ const ProgramareScreen = () => {
     }
 
     return (
-        <div>
+        <div className='container-entire-page'>
             <StepProgressBar
                 startingStep={0}
                 onSubmit={onFormSubmit}
                 steps={[
                     {
-                        label: 'Servicii',
+                        label: nameStep1,
                         // subtitle: '20%',
                         // name: 'step 1',
                         // content: step1Content
+                        validator:step2Validator
                     },
                     {
-                        label: 'Stylist',
+                        label: nameStep2,
                         // subtitle: '40%',
                         // name: 'step 2',
                         // content: step2Content,
                         validator: step2Validator
                     },
                     {
-                        label: 'Date',
+                        label: nameStep3,
                         // subtitle: '60%',
                         // name: 'step 3',
                         // content: step3Content,
                         validator: step3Validator
                     },
                     {
-                        label: 'Your info',
+                        label: nameStep4,
                         // subtitle: '80%',
                         // name: 'step 3',
                         // content: step4Content,
                         validator: step4Validator
                     },
                     {
-                        label: 'Confirm',
+                        label: nameStep5,
                         // subtitle: '100%',
                         // name: 'step 3',
                         // content: step5Content,
                         validator: step5Validator
                     }
                 ]}
-            />;
+            />
 
-            <ul>
+            <div className='flat-list-container'>
                 <FlatList
                     list={servicii}
                     renderItem={renderServiciu}
                     renderWhenEmpty={() => <div>List is empty!</div>}
-                    sortBy={["firstName", {key: "lastName", descending: true}]}
-                    groupBy={person => person.info.age > 18 ? 'Over 18' : 'Under 18'}
+                    sortBy={["name", {key: "name", descending: true}]}
+                    // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
                 />
-            </ul>
+            </div>
+
         </div>
     )
 }
