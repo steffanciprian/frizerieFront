@@ -13,7 +13,9 @@ const ProgramareScreen = () => {
         [nameStep3, setNameStep3] = useState('Date'),
         [nameStep4, setNameStep4] = useState('Your info'),
         [nameStep5, setNameStep5] = useState('Confirm'),
-        [nameServiciu, setNameServiciu] = useState('');
+        [nameServiciu, setNameServiciu] = useState(''),
+        [idForServiciu, setIdForServiciu] = useState(-1),
+        [id, setId] = useState(-1);
 
     //fetch din backend pentru recuperare de servicii
     useEffect(() => {
@@ -29,11 +31,18 @@ const ProgramareScreen = () => {
 
     }, []);
 
+    const setIds = (serviciu) => {
+
+        setId(serviciu.id)
+        setIdForServiciu(serviciu.id)
+    }
+
 
     //functie pentru renderuit serviciile
     const renderServiciu = serviciu => {
         return (
-            <div className='container-for-each-serviciu' onClick={() => setNameServiciu(serviciu.name)}>
+            <div className='container-for-each-serviciu'
+                 style={{color: idForServiciu === id ? 'green' : 'blue'}} onClick={() => setIds(serviciu)}>
                 <p style={{margin: 10, fontSize: 15}}>{serviciu.name}</p>
                 <p style={{margin: 10, fontSize: 15}}>{serviciu.pret}</p>
             </div>

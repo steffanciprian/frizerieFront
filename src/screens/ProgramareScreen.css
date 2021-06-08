@@ -9,15 +9,15 @@
     color: black;
     background-color: white;
     border-color: white;
-    -webkit-transition: transform 0.4s ease-in-out;
-    -moz-transition: transform 0.4s ease-in-out;
-    -o-transition: transform 0.4s ease-in-out;
-    transition: transform 0.4s ease-in-out;
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);
+    -webkit-transition: transform 0.2s ease-in-out;
+    -moz-transition: transform 0.2s ease-in-out;
+    -o-transition: transform 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .container-entire-page {
