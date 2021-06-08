@@ -1,12 +1,32 @@
 .container-for-each-serviciu {
     width: 40vw;
-    /*border: solid 1px cadetblue;*/
     display: flex;
     justify-content: space-between;
 }
 
 .flat-list-container :hover {
     cursor: pointer;
-    color: cadetblue;
+    color: black;
+    background-color: white;
+    border-color: white;
+    -webkit-transition: transform 0.4s ease-in-out;
+    -moz-transition: transform 0.4s ease-in-out;
+    -o-transition: transform 0.4s ease-in-out;
+    transition: transform 0.4s ease-in-out;
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
 
+.container-entire-page {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-progress-bar {
+    width: 50vw;
+    margin-top: 18vh;
 }

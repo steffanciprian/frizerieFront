@@ -30,7 +30,6 @@ const ProgramareScreen = () => {
     }, []);
 
 
-
     //functie pentru renderuit serviciile
     const renderServiciu = serviciu => {
         return (
@@ -81,47 +80,50 @@ const ProgramareScreen = () => {
 
     return (
         <div className='container-entire-page'>
-            <StepProgressBar
-                startingStep={0}
-                onSubmit={onFormSubmit}
-                steps={[
-                    {
-                        label: nameStep1,
-                        // subtitle: '20%',
-                        // name: 'step 1',
-                        // content: step1Content
-                        validator:step2Validator
-                    },
-                    {
-                        label: nameStep2,
-                        // subtitle: '40%',
-                        // name: 'step 2',
-                        // content: step2Content,
-                        validator: step2Validator
-                    },
-                    {
-                        label: nameStep3,
-                        // subtitle: '60%',
-                        // name: 'step 3',
-                        // content: step3Content,
-                        validator: step3Validator
-                    },
-                    {
-                        label: nameStep4,
-                        // subtitle: '80%',
-                        // name: 'step 3',
-                        // content: step4Content,
-                        validator: step4Validator
-                    },
-                    {
-                        label: nameStep5,
-                        // subtitle: '100%',
-                        // name: 'step 3',
-                        // content: step5Content,
-                        validator: step5Validator
-                    }
-                ]}
-            />
+            <div className='container-progress-bar'>
+                <StepProgressBar
+                    startingStep={0}
+                    onSubmit={onFormSubmit}
+                    steps={[
+                        {
+                            label: nameStep1,
+                            // subtitle: '20%',
+                            // name: 'step 1',
+                            // content: step1Content
+                            validator: step2Validator
+                        },
+                        {
+                            label: nameStep2,
+                            // subtitle: '40%',
+                            // name: 'step 2',
+                            // content: step2Content,
+                            validator: step2Validator
+                        },
+                        {
+                            label: nameStep3,
+                            // subtitle: '60%',
+                            // name: 'step 3',
+                            // content: step3Content,
+                            validator: step3Validator
+                        },
+                        {
+                            label: nameStep4,
+                            // subtitle: '80%',
+                            // name: 'step 3',
+                            // content: step4Content,
+                            validator: step4Validator
+                        },
+                        {
+                            label: nameStep5,
+                            // subtitle: '100%',
+                            // name: 'step 3',
+                            // content: step5Content,
+                            validator: step5Validator
+                        }
+                    ]}
+                />
+            </div>
+
 
             <div className='flat-list-container'>
                 <FlatList
