@@ -5,6 +5,7 @@ import 'react-step-progress/dist/index.css';
 import FlatList from 'flatlist-react';
 import axios from 'axios'
 import './ProgramareScreen.css'
+import {useStore} from "react-redux";
 
 const ProgramareScreen = () => {
     let [servicii, setServicii] = useState([]),
@@ -17,6 +18,10 @@ const ProgramareScreen = () => {
         [selectedId, setSelectedId] = useState(-1),
         [isLoaded, setIsLoaded] = useState(false),
         [id, setId] = useState(-1);
+
+    const store = useStore();
+    const storeState = store.getState();
+    const selectedServiciuId = storeState.selectedServiciu.selectedServiciuId;
 
     //fetch din backend pentru recuperare de servicii
     useEffect(() => {
@@ -34,36 +39,33 @@ const ProgramareScreen = () => {
     }, []);
 
     let setIds = (serviciu) => {
+        console.log(selectedServiciuId + 'direct din store')
+        console.log(serviciu.id +' serviciu.id')
         setId(serviciu.id)
         setSelectedId(serviciu.id)
-        console.log(selectedId)
+        store.dispatch({
+            type: 'setServiciuId',
+            payload: serviciu.id,
+        })
+        console.log(selectedId + ' selected id')
     }
-
 
     //functie pentru renderuit serviciile
     const renderServiciu = (serviciu) => {
         return (
             <div key={serviciu.id}
-                 className={selectedId === serviciu.id ? 'container-selected' : 'container-for-each-serviciu'}
+                 className={selectedServiciuId === serviciu.id ? 'container-selected' : 'container-for-each-serviciu'}
                  onClick={() => setIds(serviciu)}>
                 <p style={{margin: 10, fontSize: 15}}>{serviciu.name}</p>
                 <p style={{margin: 10, fontSize: 15}}>{serviciu.pret} {serviciu.moneda}</p>
             </div>
-
         );
     }
 
     // setup the step content
     const step1Content =
-        <div className='flat-list-container'>
-            <FlatList
-                list={servicii}
-                renderItem={renderServiciu}
-                renderWhenEmpty={() => <div>List is empty!</div>}
-                sortBy={["name", {key: "name", descending: true}]}
-                // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
-            />
-        </div>;
+        <p>asda</p>
+    ;
     const step2Content = <div><p>2</p></div>;
     const step3Content = <div><p>3</p></div>;
     const step4Content = <div><p>4</p></div>;
@@ -98,14 +100,12 @@ const ProgramareScreen = () => {
         // This function will be executed at the last step
         // when the submit button (next button in the previous steps) is pressed
         return true;
-
     }
 
     return (
         <div className='container-entire-page'>
             {isLoaded ?
                 <div className='container-progress-bar'>
-
                     <StepProgressBar
                         wrapperClass='content-style'
                         buttonWrapperClass='button-wrapper-class'
@@ -116,7 +116,7 @@ const ProgramareScreen = () => {
                                 label: nameStep1,
                                 // subtitle: '20%',
                                 // name: 'step 1',
-                                content: step1Content,
+                                // content: step1Content,
                                 validator: step2Validator
                             },
                             {
@@ -149,6 +149,15 @@ const ProgramareScreen = () => {
                             }
                         ]}
                     />
+                    <div className='flat-list-container'>
+                        <FlatList
+                            list={servicii}
+                            renderItem={renderServiciu}
+                            renderWhenEmpty={() => <div>List is empty!</div>}
+                            sortBy={["name", {key: "name", descending: true}]}
+                            // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
+                        />
+                    </div>
                 </div>
                 :
                 <p>loading...</p>

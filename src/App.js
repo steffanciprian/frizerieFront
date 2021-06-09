@@ -1,7 +1,10 @@
 import './App.css';
 
+
 function App() {
+
     return (
+
         <div className="App" style={{
             backgroundImage: 'url("https://wallpaperaccess.com/full/2154227.jpg")'
         }}>
