@@ -14,7 +14,7 @@ const ProgramareScreen = () => {
         [nameStep4, setNameStep4] = useState('Your info'),
         [nameStep5, setNameStep5] = useState('Confirm'),
         [nameServiciu, setNameServiciu] = useState(''),
-        [idForServiciu, setIdForServiciu] = useState(-1),
+        [selectedId, setSelectedId] = useState(-1),
         [id, setId] = useState(-1);
 
     //fetch din backend pentru recuperare de servicii
@@ -32,17 +32,16 @@ const ProgramareScreen = () => {
     }, []);
 
     const setIds = (serviciu) => {
-
         setId(serviciu.id)
-        setIdForServiciu(serviciu.id)
+        setSelectedId(serviciu.id)
     }
 
 
     //functie pentru renderuit serviciile
     const renderServiciu = serviciu => {
         return (
-            <div className='container-for-each-serviciu'
-                 style={{color: idForServiciu === id ? 'green' : 'blue'}} onClick={() => setIds(serviciu)}>
+            <div className= {selectedId === serviciu.id ? 'container-selected' :'container-for-each-serviciu'}
+                  onClick={() => setIds(serviciu)}>
                 <p style={{margin: 10, fontSize: 15}}>{serviciu.name}</p>
                 <p style={{margin: 10, fontSize: 15}}>{serviciu.pret}</p>
             </div>
