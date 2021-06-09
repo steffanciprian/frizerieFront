@@ -7,7 +7,6 @@
 .flat-list-container :hover {
     cursor: pointer;
     color: black;
-    border-color: white;
     -webkit-transition: transform 0.2s ease-in-out;
     -moz-transition: transform 0.2s ease-in-out;
     -o-transition: transform 0.2s ease-in-out;
@@ -17,12 +16,16 @@
     -o-transform: scale(1.05);
     -ms-transform: scale(1.05);
     transform: scale(1.05);
+    border: solid 1px cadetblue;
+    border-radius: 50px;
 }
+
 
 .container-entire-page {
     align-items: center;
     display: flex;
     flex-direction: column;
+    height: 70vh;
 }
 
 .container-progress-bar {
@@ -35,4 +38,5 @@
     display: flex;
     justify-content: space-between;
     background-color: cadetblue;
+    border-radius: 50px;
 }
