@@ -41,10 +41,9 @@ class ProgramareScreen extends Component {
 
     }
 
+
     render() {
         const {servicii,} = this.props;
-        const {selectedServiciuId} = this.props;
-        console.log(selectedServiciuId)
 
         //functie pentru renderuit serviciile
         const renderServiciu = (serviciu) => {
@@ -60,13 +59,6 @@ class ProgramareScreen extends Component {
 
         // setup the step content
         const step1Content = <div className='flat-list-container'>
-            <FlatList
-                list={servicii}
-                renderItem={renderServiciu}
-                renderWhenEmpty={() => <div>List is empty!</div>}
-                sortBy={["name", {key: "name", descending: true}]}
-                // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
-            />
         </div>;
         const step2Content = <div><p>2</p></div>;
         const step3Content = <div><p>3</p></div>;
@@ -151,7 +143,15 @@ class ProgramareScreen extends Component {
                             }
                         ]}
                     />
-
+                    <div className='flat-list-container'>
+                        <FlatList
+                            list={servicii}
+                            renderItem={renderServiciu}
+                            renderWhenEmpty={() => <div>List is empty!</div>}
+                            sortBy={["name", {key: "name", descending: true}]}
+                            // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
+                        />
+                    </div>
                 </div>
             </div>)
     }
