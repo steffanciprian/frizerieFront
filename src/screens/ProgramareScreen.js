@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router";
-import {connect} from 'react-redux';
+import {connect, useStore} from 'react-redux';
 import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
 import FlatList from 'flatlist-react';
@@ -13,16 +13,16 @@ import setSelectedServiciuId from '../store/Dispatch/SetSelectedServiciuId'
 class ProgramareScreen extends Component {
     constructor(props) {
         super(props);
-    }
-
-    state = {
-        nameStep1: 'Servicii',
-        nameStep2: 'Stylist',
-        nameStep3: 'Date',
-        nameStep4: 'Your info',
-        nameStep5: 'Confirm',
-        nameServiciu: '',
-
+        this.state = {
+            nameStep1: 'Servicii',
+            nameStep2: 'Stylist',
+            nameStep3: 'Date',
+            nameStep4: 'Your info',
+            nameStep5: 'Confirm',
+            nameServiciu: '',
+            servicii: [],
+            selectedServiciuId: -1,
+        }
     }
 
     componentDidMount() {
@@ -36,7 +36,8 @@ class ProgramareScreen extends Component {
     }
 
     selectServiciuId = (idServiciuSelected) => {
-        this.props.dispatch(selectServiciuId(idServiciuSelected))
+        const {setSelectServiciuId} = this.props;
+        setSelectServiciuId(idServiciuSelected)
 
     }
 
@@ -49,8 +50,8 @@ class ProgramareScreen extends Component {
         const renderServiciu = (serviciu) => {
             return (
                 <div key={serviciu.id}
-                     className={selectedServiciuId === serviciu.id ? 'container-selected' : 'container-for-each-serviciu'}
-                     onClick={() => selectServiciuId(serviciu.id)}>
+                     className={this.state.selectedServiciuId === serviciu.id ? 'container-selected' : 'container-for-each-serviciu'}
+                     onClick={() => this.setState({selectedServiciuId: serviciu.id})}>
                     <p style={{margin: 10, fontSize: 15}}>{serviciu.name}</p>
                     <p style={{margin: 10, fontSize: 15}}>{serviciu.pret} {serviciu.moneda}</p>
                 </div>
@@ -106,6 +107,7 @@ class ProgramareScreen extends Component {
         return (
             <div className='container-entire-page'>
                 <div className='container-progress-bar'>
+                    <p>{this.state.selectedServiciuId}</p>
                     <StepProgressBar
                         wrapperClass='content-style'
                         buttonWrapperClass='button-wrapper-class'
