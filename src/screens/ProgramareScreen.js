@@ -41,7 +41,7 @@ class ProgramareScreen extends Component {
     }
 
     render() {
-        const {servicii} = this.props;
+        const {servicii,} = this.props;
         const {selectedServiciuId} = this.props;
         console.log(selectedServiciuId)
 
@@ -58,7 +58,15 @@ class ProgramareScreen extends Component {
         }
 
         // setup the step content
-        const step1Content = <p>asda</p>;
+        const step1Content = <div className='flat-list-container'>
+            <FlatList
+                list={servicii}
+                renderItem={renderServiciu}
+                renderWhenEmpty={() => <div>List is empty!</div>}
+                sortBy={["name", {key: "name", descending: true}]}
+                // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
+            />
+        </div>;
         const step2Content = <div><p>2</p></div>;
         const step3Content = <div><p>3</p></div>;
         const step4Content = <div><p>4</p></div>;
@@ -95,62 +103,55 @@ class ProgramareScreen extends Component {
         if (this.shouldComponentRender())
             return <p>loading...</p>
 
-        return (<div className='container-entire-page'>
-            <div className='container-progress-bar'>
-                <StepProgressBar
-                    wrapperClass='content-style'
-                    buttonWrapperClass='button-wrapper-class'
-                    startingStep={0}
-                    onSubmit={onFormSubmit}
-                    steps={[
-                        {
-                            label: this.state.nameStep1,
-                            // subtitle: '20%',
-                            // name: 'step 1',
-                            // content: step1Content,
-                            validator: step2Validator
-                        },
-                        {
-                            label: this.state.nameStep2,
-                            // subtitle: '40%',
-                            // name: 'step 2',
-                            content: step2Content,
-                            validator: step2Validator
-                        },
-                        {
-                            label: this.state.nameStep3,
-                            // subtitle: '60%',
-                            // name: 'step 3',
-                            content: step3Content,
-                            validator: step3Validator
-                        },
-                        {
-                            label: this.state.nameStep4,
-                            // subtitle: '80%',
-                            // name: 'step 3',
-                            content: step4Content,
-                            validator: step4Validator
-                        },
-                        {
-                            label: this.state.nameStep5,
-                            // subtitle: '100%',
-                            // name: 'step 3',
-                            content: step5Content,
-                            validator: step5Validator
-                        }
-                    ]}
-                />
-                <div className='flat-list-container'>
-                    <FlatList
-                        list={servicii}
-                        renderItem={renderServiciu}
-                        renderWhenEmpty={() => <div>List is empty!</div>}
-                        sortBy={["name", {key: "name", descending: true}]}
-                        // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
+        return (
+            <div className='container-entire-page'>
+                <div className='container-progress-bar'>
+                    <StepProgressBar
+                        wrapperClass='content-style'
+                        buttonWrapperClass='button-wrapper-class'
+                        startingStep={0}
+                        onSubmit={onFormSubmit}
+                        steps={[
+                            {
+                                label: this.state.nameStep1,
+                                // subtitle: '20%',
+                                // name: 'step 1',
+                                content: step1Content,
+                                validator: step2Validator
+                            },
+                            {
+                                label: this.state.nameStep2,
+                                // subtitle: '40%',
+                                // name: 'step 2',
+                                content: step2Content,
+                                validator: step2Validator
+                            },
+                            {
+                                label: this.state.nameStep3,
+                                // subtitle: '60%',
+                                // name: 'step 3',
+                                content: step3Content,
+                                validator: step3Validator
+                            },
+                            {
+                                label: this.state.nameStep4,
+                                // subtitle: '80%',
+                                // name: 'step 3',
+                                content: step4Content,
+                                validator: step4Validator
+                            },
+                            {
+                                label: this.state.nameStep5,
+                                // subtitle: '100%',
+                                // name: 'step 3',
+                                content: step5Content,
+                                validator: step5Validator
+                            }
+                        ]}
                     />
+
                 </div>
-            </div>
-        </div>)
+            </div>)
     }
 
 }

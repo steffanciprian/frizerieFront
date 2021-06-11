@@ -29,7 +29,6 @@ export default function fetchServiciiReducer(state = initialState, action) {
         case FETCH_SERVICII_ERROR:
             return {
                 ...state,
-                loading: false,
                 error: action.payload.error,
                 servicii: []
             }
