@@ -14,12 +14,16 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import ReduxThunk from 'redux-thunk';
 import setSelectedServiciuReducer from './store/reducers/SelectedServiciuReducer';
-
+import fetchServiciiReducer from './store/reducers/FetchServiciiReducer';
 
 const rootReducer = combineReducers({
-    selectedServiciu: setSelectedServiciuReducer
+    setSelectedServiciuReducer,
+    fetchServiciiReducer,
 });
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+
+const initialState = {};
+const store = createStore(rootReducer, initialState, applyMiddleware(ReduxThunk));
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>

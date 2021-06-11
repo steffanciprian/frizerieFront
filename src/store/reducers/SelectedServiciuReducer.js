@@ -2,7 +2,7 @@ const initialState = {
     selectedServiciuId: -1,
 }
 
-function setSelectedServiciuReducer(state = initialState, action) {
+export default function setSelectedServiciuReducer(state = initialState, action) {
     switch (action.type) {
         case 'setServiciuId' :
             return {
@@ -13,4 +13,3 @@ function setSelectedServiciuReducer(state = initialState, action) {
     }
 }
 
-export default setSelectedServiciuReducer;

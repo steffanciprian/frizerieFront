@@ -1,11 +1,19 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router";
+import {connect} from 'react-redux';
 import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
 import FlatList from 'flatlist-react';
 import './ProgramareScreen.css'
+import {bindActionCreators} from "redux";
+import fetchServicii from "../store/fetch/FetchServicii";
 
 class ProgramareScreen extends Component {
+    constructor(props) {
+        super(props);
+        console.log(props)
+    }
+
     state = {
         servicii: [],
         nameStep1: 'Servicii',
@@ -19,29 +27,22 @@ class ProgramareScreen extends Component {
         isLoaded: false,
     }
 
+
     //fetch din backend pentru recuperare de servicii
     componentDidMount() {
-        fetch('http://localhost:8080/servicii',
-        )
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result)
-                    this.setState({
-                        isLoaded: true,
-                        servicii: result
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
+        const {fetchServicii} = this.props;
+        fetchServicii();
+    }
+
+    shouldComponentRender() {
+        const {loading} = this.props;
+        return loading;
     }
 
     render() {
+        const {servicii} = this.props;
+
+
         let setIds = (serviciu) => {
             this.setState({
                 id: serviciu.id,
@@ -100,64 +101,64 @@ class ProgramareScreen extends Component {
             return true;
         }
 
+        if (this.shouldComponentRender())
+            return <p>loading...</p>
+
         return (<div className='container-entire-page'>
-            {this.state.isLoaded ?
-                <div className='container-progress-bar'>
-                    <StepProgressBar
-                        wrapperClass='content-style'
-                        buttonWrapperClass='button-wrapper-class'
-                        startingStep={0}
-                        onSubmit={onFormSubmit}
-                        steps={[
-                            {
-                                label: this.state.nameStep1,
-                                // subtitle: '20%',
-                                // name: 'step 1',
-                                // content: step1Content,
-                                validator: step2Validator
-                            },
-                            {
-                                label: this.state.nameStep2,
-                                // subtitle: '40%',
-                                // name: 'step 2',
-                                content: step2Content,
-                                validator: step2Validator
-                            },
-                            {
-                                label: this.state.nameStep3,
-                                // subtitle: '60%',
-                                // name: 'step 3',
-                                content: step3Content,
-                                validator: step3Validator
-                            },
-                            {
-                                label: this.state.nameStep4,
-                                // subtitle: '80%',
-                                // name: 'step 3',
-                                content: step4Content,
-                                validator: step4Validator
-                            },
-                            {
-                                label: this.state.nameStep5,
-                                // subtitle: '100%',
-                                // name: 'step 3',
-                                content: step5Content,
-                                validator: step5Validator
-                            }
-                        ]}
+            <div className='container-progress-bar'>
+                <StepProgressBar
+                    wrapperClass='content-style'
+                    buttonWrapperClass='button-wrapper-class'
+                    startingStep={0}
+                    onSubmit={onFormSubmit}
+                    steps={[
+                        {
+                            label: this.state.nameStep1,
+                            // subtitle: '20%',
+                            // name: 'step 1',
+                            // content: step1Content,
+                            validator: step2Validator
+                        },
+                        {
+                            label: this.state.nameStep2,
+                            // subtitle: '40%',
+                            // name: 'step 2',
+                            content: step2Content,
+                            validator: step2Validator
+                        },
+                        {
+                            label: this.state.nameStep3,
+                            // subtitle: '60%',
+                            // name: 'step 3',
+                            content: step3Content,
+                            validator: step3Validator
+                        },
+                        {
+                            label: this.state.nameStep4,
+                            // subtitle: '80%',
+                            // name: 'step 3',
+                            content: step4Content,
+                            validator: step4Validator
+                        },
+                        {
+                            label: this.state.nameStep5,
+                            // subtitle: '100%',
+                            // name: 'step 3',
+                            content: step5Content,
+                            validator: step5Validator
+                        }
+                    ]}
+                />
+                <div className='flat-list-container'>
+                    <FlatList
+                        list={servicii}
+                        renderItem={renderServiciu}
+                        renderWhenEmpty={() => <div>List is empty!</div>}
+                        sortBy={["name", {key: "name", descending: true}]}
+                        // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
                     />
-                    <div className='flat-list-container'>
-                        <FlatList
-                            list={this.state.servicii}
-                            renderItem={renderServiciu}
-                            renderWhenEmpty={() => <div>List is empty!</div>}
-                            sortBy={["name", {key: "name", descending: true}]}
-                            // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
-                        />
-                    </div>
                 </div>
-                :
-                <p>loading...</p>
+            </div>
             }
 
 
@@ -166,4 +167,18 @@ class ProgramareScreen extends Component {
 
 }
 
-export default withRouter(ProgramareScreen);
+const mapStateToProps = state => ({
+    error: state.fetchServiciiReducer.error,
+    servicii: state.fetchServiciiReducer.servicii,
+    loading: state.fetchServiciiReducer.loading,
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    fetchServicii: fetchServicii
+}, dispatch)
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(ProgramareScreen));
+// withRouter(ProgramareScreen);
