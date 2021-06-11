@@ -6,29 +6,25 @@ import 'react-step-progress/dist/index.css';
 import FlatList from 'flatlist-react';
 import './ProgramareScreen.css'
 import {bindActionCreators} from "redux";
-import fetchServicii from "../store/fetch/FetchServicii";
+import fetchServicii from "../store/Dispatch/FetchServicii";
+import {selectServiciuId} from "../store/actions/SelectServiciuAction";
+import setSelectedServiciuId from '../store/Dispatch/SetSelectedServiciuId'
 
 class ProgramareScreen extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
     }
 
     state = {
-        servicii: [],
         nameStep1: 'Servicii',
         nameStep2: 'Stylist',
         nameStep3: 'Date',
         nameStep4: 'Your info',
         nameStep5: 'Confirm',
         nameServiciu: '',
-        selectedId: -1,
-        id: -1,
-        isLoaded: false,
+
     }
 
-
-    //fetch din backend pentru recuperare de servicii
     componentDidMount() {
         const {fetchServicii} = this.props;
         fetchServicii();
@@ -39,23 +35,22 @@ class ProgramareScreen extends Component {
         return loading;
     }
 
+    selectServiciuId = (idServiciuSelected) => {
+        this.props.dispatch(selectServiciuId(idServiciuSelected))
+
+    }
+
     render() {
         const {servicii} = this.props;
-
-
-        let setIds = (serviciu) => {
-            this.setState({
-                id: serviciu.id,
-                selectedServiciuId: serviciu.id,
-            })
-        }
+        const {selectedServiciuId} = this.props;
+        console.log(selectedServiciuId)
 
         //functie pentru renderuit serviciile
         const renderServiciu = (serviciu) => {
             return (
                 <div key={serviciu.id}
-                     className={this.state.selectedId === serviciu.id ? 'container-selected' : 'container-for-each-serviciu'}
-                     onClick={() => setIds(serviciu)}>
+                     className={selectedServiciuId === serviciu.id ? 'container-selected' : 'container-for-each-serviciu'}
+                     onClick={() => selectServiciuId(serviciu.id)}>
                     <p style={{margin: 10, fontSize: 15}}>{serviciu.name}</p>
                     <p style={{margin: 10, fontSize: 15}}>{serviciu.pret} {serviciu.moneda}</p>
                 </div>
@@ -63,9 +58,7 @@ class ProgramareScreen extends Component {
         }
 
         // setup the step content
-        // const step1Content =
-        //     <p>asda</p>
-        // ;
+        const step1Content = <p>asda</p>;
         const step2Content = <div><p>2</p></div>;
         const step3Content = <div><p>3</p></div>;
         const step4Content = <div><p>4</p></div>;
@@ -85,13 +78,11 @@ class ProgramareScreen extends Component {
         function step4Validator() {
             // return a boolean
             return true;
-
         }
 
         function step5Validator() {
             // return a boolean
             return true;
-
         }
 
         function onFormSubmit() {
@@ -159,9 +150,6 @@ class ProgramareScreen extends Component {
                     />
                 </div>
             </div>
-            }
-
-
         </div>)
     }
 
@@ -171,14 +159,15 @@ const mapStateToProps = state => ({
     error: state.fetchServiciiReducer.error,
     servicii: state.fetchServiciiReducer.servicii,
     loading: state.fetchServiciiReducer.loading,
+    selectedServiciuId: state.setSelectedServiciuReducer.selectedServiciuId,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    fetchServicii: fetchServicii
+    fetchServicii: fetchServicii,
+    setSelectedServiciuId: setSelectedServiciuId,
 }, dispatch)
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(withRouter(ProgramareScreen));
-// withRouter(ProgramareScreen);

@@ -1,13 +1,17 @@
+import {SELECT_SERVICIU_ID} from "../actions/SelectServiciuActionTypes";
+
 const initialState = {
     selectedServiciuId: -1,
 }
 
 export default function setSelectedServiciuReducer(state = initialState, action) {
     switch (action.type) {
-        case 'setServiciuId' :
+        case SELECT_SERVICIU_ID :
             return {
-                selectedServiciuId: action.selectedServiciuId
+                ...state,
+                selectedServiciuId: action.payload.idToBeSet
             }
+
         default :
             return state;
     }
