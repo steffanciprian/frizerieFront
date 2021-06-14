@@ -40,3 +40,21 @@
     background-color: cadetblue;
     border-radius: 50px;
 }
+
+.container-frizeri {
+    width: 40vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-frizeri:hover{
+    cursor: pointer;
+}
+
+.container-frizer-selected{
+    width: 40vw;
+    display: flex;
+    justify-content: space-between;
+    background-color: cadetblue;
+    border-radius: 50px;
+}

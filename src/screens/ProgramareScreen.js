@@ -6,6 +6,7 @@ import FlatList from 'flatlist-react';
 import './ProgramareScreen.css';
 import {bindActionCreators} from "redux";
 import fetchServicii from "../store/Dispatch/FetchServicii";
+import fetchFrizeriDispatch from '../store/Dispatch/FetchFrizeriDispatch'
 import setSelectedServiciuId from '../store/Dispatch/SetSelectedServiciuId';
 import Switch from "react-bootstrap/Switch";
 import HorizontalLabelPositionBelowStepper from '../components/HorizontalLabelPositionBelowStepper';
@@ -16,19 +17,14 @@ class ProgramareScreen extends Component {
         this.state = {
             servicii: [],
             selectedServiciuId: -1,
-            scaune:
-                [
-                    {name: 'Scaunul lui ciprian'},
-                    {name: 'Scaunul elenei'},
-                    {name: 'Scaunul lui Ionut'},
-                    {name: 'Scaunul lui alexandru'}
-                ]
-            ,
+            frizeri: [],
         }
     }
 
     componentDidMount() {
-        const {fetchServicii, servicii} = this.props;
+        const {fetchServicii, servicii, fetchFrizeriDispatch} = this.props;
+        console.log(this.props)
+        fetchFrizeriDispatch();
         if (servicii.length === 0) {
             fetchServicii();
         }
@@ -45,11 +41,11 @@ class ProgramareScreen extends Component {
     }
 
     render() {
-        const {servicii} = this.props;
-        const scauneFromState = this.state.scaune;
-        const mappedScaune =
-            scauneFromState.map(scaun => <p key={scaun.name}>{scaun.name}</p>)
-        const {selectedServiciuId} = this.props;
+        const {
+            servicii,
+            frizeri,
+            selectedServiciuId
+        } = this.props;
 
         //functie pentru renderuit serviciile
         const renderServiciu = (serviciu) => {
@@ -61,6 +57,18 @@ class ProgramareScreen extends Component {
                      }>
                     <p style={{margin: 10, fontSize: 15}}>{serviciu.name}</p>
                     <p style={{margin: 10, fontSize: 15}}>{serviciu.pret} {serviciu.moneda}</p>
+                </div>
+            );
+        }
+
+        const renderFrizer = frizer => {
+            return (
+                <div key={frizer.id}
+                     className={selectedServiciuId === frizer.id ? 'container-selected' : 'container-for-each-serviciu'}
+                     onClick={() =>
+                         this.props.setSelectedServiciuId(frizer.id)}>
+                    <p style={{margin: 10, fontSize: 15}}>{frizer.name}</p>
+                    <p style={{margin: 10, fontSize: 15}}>Scaun nr. {frizer.scaun}</p>
                 </div>
             );
         }
@@ -85,7 +93,15 @@ class ProgramareScreen extends Component {
                             </div>
                         </Route>
                         <Route exact path="/programare/stylist">
-                            {mappedScaune}
+                            <div className='flat-list-container'>
+                                <FlatList
+                                    list={frizeri}
+                                    renderItem={renderFrizer}
+                                    renderWhenEmpty={() => <div>List is empty!</div>}
+                                    sortBy={["name", {key: "name", descending: true}]}
+                                    // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
+                                />
+                            </div>
                         </Route>
                     </Switch>
                 </div>
@@ -98,11 +114,13 @@ const mapStateToProps = state => ({
     servicii: state.fetchServiciiReducer.servicii,
     loading: state.fetchServiciiReducer.loading,
     selectedServiciuId: state.setSelectedServiciuReducer.selectedServiciuId,
+    frizeri: state.fetchFrizeriReducer.frizeri,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     fetchServicii: fetchServicii,
     setSelectedServiciuId: setSelectedServiciuId,
+    fetchFrizeriDispatch: fetchFrizeriDispatch,
 }, dispatch)
 
 export default connect(

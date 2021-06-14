@@ -16,11 +16,13 @@ import ReduxThunk from 'redux-thunk';
 import setSelectedServiciuReducer from './store/reducers/SelectedServiciuReducer';
 import fetchServiciiReducer from './store/reducers/FetchServiciiReducer';
 import currentStepReducer from "./store/reducers/CurrentStepReducer";
+import fetchFrizeriReducer from "./store/reducers/FetchFrizeriReducer";
 
 const rootReducer = combineReducers({
     setSelectedServiciuReducer,
     fetchServiciiReducer,
     currentStepReducer,
+    fetchFrizeriReducer,
 });
 
 const initialState = {};

@@ -1,40 +1,34 @@
-import {
-    FETCH_SERVICII_ERROR,
-    FETCH_SERVICII_PENDING,
-    FETCH_SERVICII_SUCCESS
-} from "../actions/FetchServiciiActionTypes";
+import {FETCH_FRIZERI_PENDING, FETCH_FRIZERI_ERROR, FETCH_FRIZERI_SUCCESS} from "../actions/FetchFrizeriActionTypes";
 
 const initialState = {
-    servicii: [],
-    loading: false,
+    frizeri: [],
+    loading: true,
     error: null,
 }
 
-export default function fetchServiciiReducer(state = initialState, action) {
+export default function fetchFrizeriReducer(state = initialState, action) {
     switch (action.type) {
-        case FETCH_SERVICII_PENDING:
+        case FETCH_FRIZERI_PENDING:
             return {
                 ...state,
                 loading: true,
                 error: null,
             }
-
-        case FETCH_SERVICII_SUCCESS:
+        case FETCH_FRIZERI_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 error: null,
-                servicii: action.payload.servicii,
+                frizeri: action.payload.frizeri
             }
-
-        case FETCH_SERVICII_ERROR:
+        case FETCH_FRIZERI_ERROR:
             return {
                 ...state,
                 error: action.payload.error,
-                servicii: []
+                frizeri: []
             }
-
         default:
             return state;
     }
+
 }

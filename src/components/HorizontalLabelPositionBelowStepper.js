@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import {bindActionCreators} from "redux";
 import setCurrentStepDispatch from "../store/Dispatch/CurrentStepDispatch";
+import setSelectedServiciuId from "../store/Dispatch/SetSelectedServiciuId";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,9 +25,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 function getSteps() {
-    return ['Servicii', 'Stylist', 'Scaun', "Data", 'Confirm'];
+    return ['Servicii', 'Stylist', 'Data', "Confirm"];
 }
 
 function HorizontalLinearStepper(props) {
@@ -43,19 +43,22 @@ function HorizontalLinearStepper(props) {
             setActiveStep(currentStep);
         }
     })
-    const handleNext = () => {
-        let {currentStep} = props;
-        currentStep++;
-        props.currentStepDispatch(currentStep)
-        setActiveStep(currentStep);
 
+    const handleNext = () => {
+        let {currentStep, selectedServiciuId} = props;
+        if (selectedServiciuId !== -1) {
+            currentStep++;
+            props.currentStepDispatch(currentStep)
+            setActiveStep(currentStep);
+            props.setSelectedServiciuId(-1)
+        } else {
+
+        }
         if (currentStep === 1)
             history.push('/programare/stylist')
         if (currentStep === 2)
-            history.push('/programare/scaun')
-        if (currentStep === 3)
             history.push('/programare/data-programare')
-        if (currentStep === 4)
+        if (currentStep === 3)
             history.push('/programare/confirm')
     };
 
@@ -114,10 +117,12 @@ function HorizontalLinearStepper(props) {
 
 const mapStateToProps = state => ({
     currentStep: state.currentStepReducer.currentStep,
+    selectedServiciuId: state.setSelectedServiciuReducer.selectedServiciuId,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    currentStepDispatch: setCurrentStepDispatch
+    currentStepDispatch: setCurrentStepDispatch,
+    setSelectedServiciuId: setSelectedServiciuId,
 }, dispatch)
 
 export default connect(
