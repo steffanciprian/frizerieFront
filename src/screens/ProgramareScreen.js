@@ -58,7 +58,6 @@ class ProgramareScreen extends Component {
                      className={selectedServiciuId === serviciu.id ? 'container-selected' : 'container-for-each-serviciu'}
                      onClick={() =>
                          this.props.setSelectedServiciuId(serviciu.id)
-                         // this.setState({selectedServiciuId: serviciu.id})
                      }>
                     <p style={{margin: 10, fontSize: 15}}>{serviciu.name}</p>
                     <p style={{margin: 10, fontSize: 15}}>{serviciu.pret} {serviciu.moneda}</p>
@@ -71,9 +70,8 @@ class ProgramareScreen extends Component {
 
         return (
             <div className='container-entire-page'>
+                <HorizontalLabelPositionBelowStepper/>
                 <div className='container-progress-bar'>
-                    <p>{selectedServiciuId}</p>
-                    <HorizontalLabelPositionBelowStepper/>
                     <Switch>
                         <Route exact path="/programare">
                             <div className='flat-list-container'>

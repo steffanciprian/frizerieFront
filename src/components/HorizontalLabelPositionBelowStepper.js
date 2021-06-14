@@ -29,23 +29,6 @@ function getSteps() {
     return ['Servicii', 'Stylist', 'Scaun', "Data", 'Confirm'];
 }
 
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return 'Stylist';
-        case 1:
-            return 'Scaun';
-        case 2:
-            return 'Data';
-        case 3:
-            return 'Informatii';
-        case 4:
-            return 'Confirm'
-        default:
-            return 'Unknown step';
-    }
-}
-
 function HorizontalLinearStepper(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -109,7 +92,6 @@ function HorizontalLinearStepper(props) {
                     </div>
                 ) : (
                     <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
                         <div>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                 Back
