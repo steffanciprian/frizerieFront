@@ -81,32 +81,32 @@ function HorizontalLinearStepper(props) {
                 })}
             </Stepper>
             <div>
-                {activeStep === steps.length ? (
-                    <div>
-                        <Typography className={classes.instructions}>
-                            All steps completed - you&apos;re finished
-                        </Typography>
-                        <Button onClick={handleReset} className={classes.button}>
-                            Reset
-                        </Button>K
-                    </div>
-                ) : (
-                    <div>
-                        <div>
-                            <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                                Back
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleNext}
-                                className={classes.button}
-                            >
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                {activeStep === steps.length ?
+                    (<div>
+                            <Typography className={classes.instructions}>
+                                All steps completed - you&apos;re finished
+                            </Typography>
+                            <Button onClick={handleReset} className={classes.button}>
+                                Reset
                             </Button>
                         </div>
-                    </div>
-                )}
+                    )
+                    :
+                    (<div>
+                            <div>
+                                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                                    Back
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleNext}
+                                    className={classes.button}>
+                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                </Button>
+                            </div>
+                        </div>
+                    )}
             </div>
         </div>
     );
