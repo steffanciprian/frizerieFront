@@ -6,7 +6,10 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {useHistory} from "react-router-dom";
-
+import {connect} from "react-redux";
+import {withRouter} from "react-router";
+import {bindActionCreators} from "redux";
+import setCurrentStepDispatch from "../store/Dispatch/CurrentStepDispatch";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,38 +46,38 @@ function getStepContent(step) {
     }
 }
 
-export default function HorizontalLinearStepper(props) {
+function HorizontalLinearStepper(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
     const history = useHistory();
-    console.log(activeStep + ' la primul renders')
+    let {currentStep} = props;
 
     history.listen((loc, action) => {
         if (action === 'POP') {
-            // history.goBack()
-            setActiveStep((prevActiveStep) => prevActiveStep - 1);
+            currentStep--;
+            props.currentStepDispatch(currentStep)
+            setActiveStep(currentStep);
         }
     })
     const handleNext = () => {
-        console.log(activeStep + ' active step inainte sa l setez la next')
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        if (activeStep === 0)
+        let {currentStep} = props;
+        currentStep++;
+        props.currentStepDispatch(currentStep)
+        setActiveStep(currentStep);
+
+        if (currentStep === 1)
             history.push('/programare/stylist')
-        if (activeStep === 1)
+        if (currentStep === 2)
             history.push('/programare/scaun')
-        if (activeStep === 2)
+        if (currentStep === 3)
             history.push('/programare/data-programare')
-        if (activeStep === 3)
+        if (currentStep === 4)
             history.push('/programare/confirm')
-        console.log(activeStep + ' active step dupa setare la next')
     };
 
     const handleBack = () => {
-        console.log(activeStep + ' active step inainte sa l setez la back')
         history.goBack();
-        console.log(activeStep + ' active step dupa  setare la back')
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
     const handleReset = () => {
@@ -126,3 +129,17 @@ export default function HorizontalLinearStepper(props) {
         </div>
     );
 }
+
+const mapStateToProps = state => ({
+    currentStep: state.currentStepReducer.currentStep,
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    currentStepDispatch: setCurrentStepDispatch
+}, dispatch)
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(HorizontalLinearStepper));
+

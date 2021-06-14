@@ -3,10 +3,10 @@ import {Route, withRouter} from "react-router";
 import {connect} from 'react-redux';
 import 'react-step-progress/dist/index.css';
 import FlatList from 'flatlist-react';
-import './ProgramareScreen.css'
+import './ProgramareScreen.css';
 import {bindActionCreators} from "redux";
 import fetchServicii from "../store/Dispatch/FetchServicii";
-import setSelectedServiciuId from '../store/Dispatch/SetSelectedServiciuId'
+import setSelectedServiciuId from '../store/Dispatch/SetSelectedServiciuId';
 import Switch from "react-bootstrap/Switch";
 import HorizontalLabelPositionBelowStepper from '../components/HorizontalLabelPositionBelowStepper';
 
@@ -14,12 +14,6 @@ class ProgramareScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nameStep1: 'Servicii',
-            nameStep2: 'Stylist',
-            nameStep3: 'Date',
-            nameStep4: 'Your info',
-            nameStep5: 'Confirm',
-            nameServiciu: '',
             servicii: [],
             selectedServiciuId: -1,
             scaune:
@@ -28,13 +22,16 @@ class ProgramareScreen extends Component {
                     {name: 'Scaunul elenei'},
                     {name: 'Scaunul lui Ionut'},
                     {name: 'Scaunul lui alexandru'}
-                ],
+                ]
+            ,
         }
     }
 
     componentDidMount() {
-        const {fetchServicii} = this.props;
-        fetchServicii();
+        const {fetchServicii, servicii} = this.props;
+        if (servicii.length === 0) {
+            fetchServicii();
+        }
     }
 
     shouldComponentRender() {
@@ -45,22 +42,24 @@ class ProgramareScreen extends Component {
     selectServiciuId = (idServiciuSelected) => {
         const {setSelectServiciuId} = this.props;
         setSelectServiciuId(idServiciuSelected)
-
     }
 
     render() {
-        const {servicii,} = this.props;
-
+        const {servicii} = this.props;
         const scauneFromState = this.state.scaune;
         const mappedScaune =
             scauneFromState.map(scaun => <p key={scaun.name}>{scaun.name}</p>)
+        const {selectedServiciuId} = this.props;
 
         //functie pentru renderuit serviciile
         const renderServiciu = (serviciu) => {
             return (
                 <div key={serviciu.id}
-                     className={this.state.selectedServiciuId === serviciu.id ? 'container-selected' : 'container-for-each-serviciu'}
-                     onClick={() => this.setState({selectedServiciuId: serviciu.id})}>
+                     className={selectedServiciuId === serviciu.id ? 'container-selected' : 'container-for-each-serviciu'}
+                     onClick={() =>
+                         this.props.setSelectedServiciuId(serviciu.id)
+                         // this.setState({selectedServiciuId: serviciu.id})
+                     }>
                     <p style={{margin: 10, fontSize: 15}}>{serviciu.name}</p>
                     <p style={{margin: 10, fontSize: 15}}>{serviciu.pret} {serviciu.moneda}</p>
                 </div>
@@ -73,12 +72,8 @@ class ProgramareScreen extends Component {
         return (
             <div className='container-entire-page'>
                 <div className='container-progress-bar'>
-                    <p>{this.state.selectedServiciuId}</p>
-                    <HorizontalLabelPositionBelowStepper
-                    selectedServiciuId={this.state.selectedServiciuId}
-
-                    />
-
+                    <p>{selectedServiciuId}</p>
+                    <HorizontalLabelPositionBelowStepper/>
                     <Switch>
                         <Route exact path="/programare">
                             <div className='flat-list-container'>
@@ -95,7 +90,6 @@ class ProgramareScreen extends Component {
                             {mappedScaune}
                         </Route>
                     </Switch>
-
                 </div>
             </div>)
     }

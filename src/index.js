@@ -15,10 +15,12 @@ import {Provider} from "react-redux";
 import ReduxThunk from 'redux-thunk';
 import setSelectedServiciuReducer from './store/reducers/SelectedServiciuReducer';
 import fetchServiciiReducer from './store/reducers/FetchServiciiReducer';
+import currentStepReducer from "./store/reducers/CurrentStepReducer";
 
 const rootReducer = combineReducers({
     setSelectedServiciuReducer,
     fetchServiciiReducer,
+    currentStepReducer,
 });
 
 const initialState = {};

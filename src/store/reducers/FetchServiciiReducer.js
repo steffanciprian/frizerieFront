@@ -18,6 +18,7 @@ export default function fetchServiciiReducer(state = initialState, action) {
                 loading: true,
                 error: null,
             }
+
         case FETCH_SERVICII_SUCCESS:
             return {
                 ...state,
@@ -32,6 +33,7 @@ export default function fetchServiciiReducer(state = initialState, action) {
                 error: action.payload.error,
                 servicii: []
             }
+
         default:
             return state;
     }
