@@ -55,6 +55,7 @@ class ProgramareScreen extends Component {
                      onClick={() =>
                          this.props.setSelectedServiciuId(serviciu.id)
                      }>
+
                     <p style={{margin: 10, fontSize: 15}}>{serviciu.name}</p>
                     <p style={{margin: 10, fontSize: 15}}>{serviciu.pret} {serviciu.moneda}</p>
                 </div>
@@ -79,7 +80,9 @@ class ProgramareScreen extends Component {
         return (
             <div className='container-entire-page'>
                 <HorizontalLabelPositionBelowStepper/>
+
                 <div className='container-progress-bar'>
+
                     <Switch>
                         <Route exact path="/programare">
                             <div className='flat-list-container'>

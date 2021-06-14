@@ -14,12 +14,14 @@ import setSelectedServiciuId from "../store/Dispatch/SetSelectedServiciuId";
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        marginTop: 60,
         width: '100%',
     },
     button: {
         marginRight: theme.spacing(1),
     },
     instructions: {
+        flexDirection: 'row',
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
     },
@@ -54,7 +56,7 @@ function HorizontalLinearStepper(props) {
         } else {
 
         }
-        if (currentStep === 1)
+        if (currentStep === 1 && selectedServiciuId !== -1)
             history.push('/programare/stylist')
         if (currentStep === 2)
             history.push('/programare/data-programare')
