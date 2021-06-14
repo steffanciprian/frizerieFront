@@ -31,7 +31,8 @@ ReactDOM.render(
             <Switch>
                 <Route exact path="/" component={App}/>
                 <Route exact path="/preturi" component={PreturiScreen}/>
-                <Route exact path="/programare" component={ProgramareScreen}/>
+                <Route path="/programare" component={ProgramareScreen}/>
+                {/*<Route exact path="/programare/stylist" component={}*/}
             </Switch>
             <Footer/>
         </BrowserRouter>
