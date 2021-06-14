@@ -88,7 +88,7 @@ function HorizontalLinearStepper(props) {
                         </Typography>
                         <Button onClick={handleReset} className={classes.button}>
                             Reset
-                        </Button>
+                        </Button>K
                     </div>
                 ) : (
                     <div>
