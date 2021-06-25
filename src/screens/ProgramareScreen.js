@@ -20,7 +20,7 @@ class ProgramareScreen extends Component {
             servicii: [],
             selectedServiciuId: -1,
             frizeri: [],
-            selectedFrizerId : -1,
+            selectedFrizerId: -1,
         }
     }
 
@@ -37,11 +37,6 @@ class ProgramareScreen extends Component {
         const {loading} = this.props;
         return loading;
     }
-
-    // selectServiciuId = (idServiciuSelected) => {
-    //     const {setSelectServiciuId} = this.props;
-    //     setSelectServiciuId(idServiciuSelected)
-    // }
 
     render() {
         const {
