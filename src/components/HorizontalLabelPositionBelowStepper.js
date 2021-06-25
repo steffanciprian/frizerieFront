@@ -11,6 +11,7 @@ import {withRouter} from "react-router";
 import {bindActionCreators} from "redux";
 import setCurrentStepDispatch from "../store/Dispatch/CurrentStepDispatch";
 import setSelectedServiciuId from "../store/Dispatch/SetSelectedServiciuId";
+import setSelectedFrizerId from "../store/Dispatch/SetSelectedFrizerId";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,18 +48,17 @@ function HorizontalLinearStepper(props) {
     })
 
     const handleNext = () => {
-        let {currentStep, selectedServiciuId} = props;
+        let {currentStep, selectedServiciuId, selectedFrizerId} = props;
         if (selectedServiciuId !== -1) {
             currentStep++;
             props.currentStepDispatch(currentStep)
             setActiveStep(currentStep);
-            props.setSelectedServiciuId(-1)
         } else {
 
         }
         if (currentStep === 1 && selectedServiciuId !== -1)
             history.push('/programare/stylist')
-        if (currentStep === 2)
+        if (currentStep === 2 && selectedFrizerId !== -1)
             history.push('/programare/data-programare')
         if (currentStep === 3)
             history.push('/programare/confirm')
@@ -125,6 +125,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
     currentStepDispatch: setCurrentStepDispatch,
     setSelectedServiciuId: setSelectedServiciuId,
+    setSelectedFrizerId:setSelectedFrizerId,
+
 }, dispatch)
 
 export default connect(

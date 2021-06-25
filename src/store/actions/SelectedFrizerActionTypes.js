@@ -1,0 +1,1 @@
+export const SELECTED_FRIZER_ID = 'SELECTED_FRIZER_ID'

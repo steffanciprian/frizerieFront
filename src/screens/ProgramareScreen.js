@@ -8,8 +8,10 @@ import {bindActionCreators} from "redux";
 import fetchServicii from "../store/Dispatch/FetchServicii";
 import fetchFrizeriDispatch from '../store/Dispatch/FetchFrizeriDispatch'
 import setSelectedServiciuId from '../store/Dispatch/SetSelectedServiciuId';
+import setSelectedFrizerId from "../store/Dispatch/SetSelectedFrizerId";
 import Switch from "react-bootstrap/Switch";
 import HorizontalLabelPositionBelowStepper from '../components/HorizontalLabelPositionBelowStepper';
+import setSelectedFrizerIdReducer from "../store/reducers/SelectedFrizerReducer";
 
 class ProgramareScreen extends Component {
     constructor(props) {
@@ -18,6 +20,7 @@ class ProgramareScreen extends Component {
             servicii: [],
             selectedServiciuId: -1,
             frizeri: [],
+            selectedFrizerId : -1,
         }
     }
 
@@ -35,16 +38,17 @@ class ProgramareScreen extends Component {
         return loading;
     }
 
-    selectServiciuId = (idServiciuSelected) => {
-        const {setSelectServiciuId} = this.props;
-        setSelectServiciuId(idServiciuSelected)
-    }
+    // selectServiciuId = (idServiciuSelected) => {
+    //     const {setSelectServiciuId} = this.props;
+    //     setSelectServiciuId(idServiciuSelected)
+    // }
 
     render() {
         const {
             servicii,
             frizeri,
-            selectedServiciuId
+            selectedServiciuId,
+            selectedFrizerId
         } = this.props;
 
         //functie pentru renderuit serviciile
@@ -65,9 +69,9 @@ class ProgramareScreen extends Component {
         const renderFrizer = frizer => {
             return (
                 <div key={frizer.id}
-                     className={selectedServiciuId === frizer.id ? 'container-selected' : 'container-for-each-serviciu'}
+                     className={selectedFrizerId === frizer.id ? 'container-selected' : 'container-for-each-serviciu'}
                      onClick={() =>
-                         this.props.setSelectedServiciuId(frizer.id)}>
+                         this.props.setSelectedFrizerId(frizer.id)}>
                     <p style={{margin: 10, fontSize: 15}}>{frizer.name}</p>
                     <p style={{margin: 10, fontSize: 15}}>Scaun nr. {frizer.scaun}</p>
                 </div>
@@ -118,11 +122,13 @@ const mapStateToProps = state => ({
     loading: state.fetchServiciiReducer.loading,
     selectedServiciuId: state.setSelectedServiciuReducer.selectedServiciuId,
     frizeri: state.fetchFrizeriReducer.frizeri,
+    selectedFrizerId: state.setSelectedFrizerIdReducer.selectedFrizerId,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     fetchServicii: fetchServicii,
     setSelectedServiciuId: setSelectedServiciuId,
+    setSelectedFrizerId: setSelectedFrizerId,
     fetchFrizeriDispatch: fetchFrizeriDispatch,
 }, dispatch)
 

@@ -14,6 +14,7 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import ReduxThunk from 'redux-thunk';
 import setSelectedServiciuReducer from './store/reducers/SelectedServiciuReducer';
+import setSelectedFrizerIdReducer from "./store/reducers/SelectedFrizerReducer";
 import fetchServiciiReducer from './store/reducers/FetchServiciiReducer';
 import currentStepReducer from "./store/reducers/CurrentStepReducer";
 import fetchFrizeriReducer from "./store/reducers/FetchFrizeriReducer";
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     fetchServiciiReducer,
     currentStepReducer,
     fetchFrizeriReducer,
+    setSelectedFrizerIdReducer,
 });
 
 const initialState = {};
