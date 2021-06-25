@@ -49,7 +49,7 @@ function HorizontalLinearStepper(props) {
 
     const handleNext = () => {
         let {currentStep, selectedServiciuId, selectedFrizerId} = props;
-        if (selectedServiciuId !== -1) {
+        if (selectedServiciuId !== -1 && selectedFrizerId !== -1) {
             currentStep++;
             props.currentStepDispatch(currentStep)
             setActiveStep(currentStep);
