@@ -119,7 +119,8 @@ class ProgramareScreen extends Component {
                         </Route>
                         <Route exact path="/programare/data-programare">
                             <div className='calendarContainer'>
-                                <CalendarFrizer/>
+                                <CalendarFrizer
+                                    onClickDay={() => console.log('am clickuit o zi')}/>
                                 <div className="programContainer">
                                     <FlatList
                                         list={frizeri}
