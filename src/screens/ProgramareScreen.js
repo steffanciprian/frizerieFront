@@ -11,6 +11,7 @@ import setSelectedServiciuId from '../store/Dispatch/SetSelectedServiciuId';
 import setSelectedFrizerId from "../store/Dispatch/SetSelectedFrizerId";
 import Switch from "react-bootstrap/Switch";
 import HorizontalLabelPositionBelowStepper from '../components/HorizontalLabelPositionBelowStepper';
+import CalendarFrizer from "../components/Calendar";
 
 class ProgramareScreen extends Component {
     constructor(props) {
@@ -117,14 +118,18 @@ class ProgramareScreen extends Component {
                             </div>
                         </Route>
                         <Route exact path="/programare/data-programare">
-                            <div className='flat-list-container'>
-                                <FlatList
-                                    list={frizeri}
-                                    renderItem={renderCalendar}
-                                    renderWhenEmpty={() => <div>List is empty!</div>}
-                                    sortBy={["name", {key: "name", descending: true}]}
-                                    // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
-                                />
+                            <div className='calendarContainer'>
+                                <CalendarFrizer/>
+                                <div className="programContainer">
+                                    <FlatList
+                                        list={frizeri}
+                                        renderItem={renderCalendar}
+                                        renderWhenEmpty={() => <div>List is empty!</div>}
+                                        sortBy={["name", {key: "name", descending: true}]}
+                                        // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
+                                    />
+                                </div>
+
                             </div>
                         </Route>
                     </Switch>

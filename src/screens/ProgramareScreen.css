@@ -20,6 +20,15 @@
     border-radius: 50px;
 }
 
+.calendarContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.programContainer {
+    display: block;
+}
+
 .container-entire-page {
     align-items: center;
     display: flex;
