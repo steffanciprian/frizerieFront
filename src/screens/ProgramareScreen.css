@@ -46,14 +46,29 @@
     justify-content: space-between;
 }
 
-.container-frizeri:hover{
+.container-frizeri:hover {
     cursor: pointer;
 }
 
-.container-frizer-selected{
+.container-frizer-selected {
     width: 40vw;
     display: flex;
     justify-content: space-between;
+    background-color: cadetblue;
+    border-radius: 50px;
+}
+
+.oraCalendarFrizer {
+    justify-content: center;
+    width: 20vw;
+    display: flex;
+}
+
+.oraCalendarFrizerSelected {
+    justify-content: center;
+    width: 20vw;
+    display: flex;
+    /*justify-content: space-between;*/
     background-color: cadetblue;
     border-radius: 50px;
 }

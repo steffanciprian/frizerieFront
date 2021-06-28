@@ -11,7 +11,6 @@ import setSelectedServiciuId from '../store/Dispatch/SetSelectedServiciuId';
 import setSelectedFrizerId from "../store/Dispatch/SetSelectedFrizerId";
 import Switch from "react-bootstrap/Switch";
 import HorizontalLabelPositionBelowStepper from '../components/HorizontalLabelPositionBelowStepper';
-import setSelectedFrizerIdReducer from "../store/reducers/SelectedFrizerReducer";
 
 class ProgramareScreen extends Component {
     constructor(props) {
@@ -62,6 +61,7 @@ class ProgramareScreen extends Component {
         }
 
         const renderFrizer = frizer => {
+            console.log(frizer.oraRezervata)
             return (
                 <div key={frizer.id}
                      className={selectedFrizerId === frizer.id ? 'container-selected' : 'container-for-each-serviciu'}
@@ -69,6 +69,17 @@ class ProgramareScreen extends Component {
                          this.props.setSelectedFrizerId(frizer.id)}>
                     <p style={{margin: 10, fontSize: 15}}>{frizer.name}</p>
                     <p style={{margin: 10, fontSize: 15}}>Scaun nr. {frizer.scaun}</p>
+                </div>
+            );
+        }
+
+        const renderCalendar = calendarFrizer => {
+            return (
+                <div key={calendarFrizer.id}
+                     className={selectedFrizerId === calendarFrizer.id ? 'oraCalendarFrizerSelected' : 'oraCalendarFrizer'}
+                     onClick={() =>
+                         this.props.setSelectedFrizerId(calendarFrizer.id)}>
+                    <p style={{margin: 10, fontSize: 15}}>{calendarFrizer.name}</p>
                 </div>
             );
         }
@@ -99,6 +110,17 @@ class ProgramareScreen extends Component {
                                 <FlatList
                                     list={frizeri}
                                     renderItem={renderFrizer}
+                                    renderWhenEmpty={() => <div>List is empty!</div>}
+                                    sortBy={["name", {key: "name", descending: true}]}
+                                    // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
+                                />
+                            </div>
+                        </Route>
+                        <Route exact path="/programare/data-programare">
+                            <div className='flat-list-container'>
+                                <FlatList
+                                    list={frizeri}
+                                    renderItem={renderCalendar}
                                     renderWhenEmpty={() => <div>List is empty!</div>}
                                     sortBy={["name", {key: "name", descending: true}]}
                                     // groupBy={serviciu => serviciu > 18 ? 'Over 18' : 'Under 18'}
