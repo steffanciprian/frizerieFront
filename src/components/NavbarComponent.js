@@ -19,7 +19,7 @@ const NavbarComponent = () => {
                         <span
                             className="span"
                             onClick={() =>
-                                history.push('preturi')}
+                                history.push('/preturi')}
                         >PRETURI</span>
                         <span
                             className="span"
