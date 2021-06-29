@@ -1,19 +1,50 @@
-import React, {useState} from 'react';
+import React, {Component} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import {bindActionCreators} from "redux";
+import fetchServicii from "../store/Dispatch/FetchServicii";
+import setSelectedServiciuId from "../store/Dispatch/SetSelectedServiciuId";
+import setSelectedFrizerId from "../store/Dispatch/SetSelectedFrizerId";
+import fetchFrizeriDispatch from "../store/Dispatch/FetchFrizeriDispatch";
+import setCurrentDayCalendarDispatch from "../store/Dispatch/CurrentDayCalendarDispatch";
+import {connect} from "react-redux";
 
-const CalendarFrizer = props => {
-    const [value, onChange] = useState(new Date());
 
-    return (
-        <div>
-            <Calendar
-                onChange={onChange}
-                value={value}
-                onClickDay={() => console.log(value)}
-            />
-        </div>
-    );
+class CalendarFrizer extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        const {currentDay} = this.props;
+        console.log(this.props)
+
+        const onChange = (nextValue) =>
+        {
+            this.props.setCurrentDayCalendarDispatch(nextValue)
+        }
+        return (
+            <div>
+                <Calendar
+                    onChange={onChange}
+                    value={currentDay}
+                    onClickDay={() => console.log(currentDay)}
+                />
+            </div>
+        );
+    }
 }
 
-export default CalendarFrizer;
+const mapStateToProps = state => ({
+    currentDay: state.currentDayCalendarReducer.currentDay,
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    setCurrentDayCalendarDispatch: setCurrentDayCalendarDispatch
+}, dispatch)
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CalendarFrizer);
+

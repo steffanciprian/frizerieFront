@@ -18,6 +18,7 @@ import setSelectedFrizerIdReducer from "./store/reducers/SelectedFrizerReducer";
 import fetchServiciiReducer from './store/reducers/FetchServiciiReducer';
 import currentStepReducer from "./store/reducers/CurrentStepReducer";
 import fetchFrizeriReducer from "./store/reducers/FetchFrizeriReducer";
+import currentDayCalendarReducer from "./store/reducers/CurrentDayCalendarReducer";
 
 const rootReducer = combineReducers({
     setSelectedServiciuReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
     currentStepReducer,
     fetchFrizeriReducer,
     setSelectedFrizerIdReducer,
+    currentDayCalendarReducer,
 });
 
 const initialState = {};

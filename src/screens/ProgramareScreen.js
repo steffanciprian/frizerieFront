@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import {Route, withRouter} from "react-router";
 import {connect} from 'react-redux';
 import 'react-step-progress/dist/index.css';
@@ -12,6 +12,7 @@ import setSelectedFrizerId from "../store/Dispatch/SetSelectedFrizerId";
 import Switch from "react-bootstrap/Switch";
 import HorizontalLabelPositionBelowStepper from '../components/HorizontalLabelPositionBelowStepper';
 import CalendarFrizer from "../components/Calendar";
+import setCurrentDayCalendarDispatch from '../store/Dispatch/CurrentDayCalendarDispatch'
 
 class ProgramareScreen extends Component {
     constructor(props) {
@@ -43,7 +44,8 @@ class ProgramareScreen extends Component {
             servicii,
             frizeri,
             selectedServiciuId,
-            selectedFrizerId
+            selectedFrizerId,
+            currentDay
         } = this.props;
 
         //functie pentru renderuit serviciile
@@ -119,8 +121,7 @@ class ProgramareScreen extends Component {
                         </Route>
                         <Route exact path="/programare/data-programare">
                             <div className='calendarContainer'>
-                                <CalendarFrizer
-                                    onClickDay={() => console.log('am clickuit o zi')}/>
+                                <CalendarFrizer currentDay={currentDay}/>
                                 <div className="programContainer">
                                     <FlatList
                                         list={frizeri}
@@ -146,6 +147,7 @@ const mapStateToProps = state => ({
     selectedServiciuId: state.setSelectedServiciuReducer.selectedServiciuId,
     frizeri: state.fetchFrizeriReducer.frizeri,
     selectedFrizerId: state.setSelectedFrizerIdReducer.selectedFrizerId,
+    currentDay: state.currentDayCalendarReducer.currentDay,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -153,6 +155,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     setSelectedServiciuId: setSelectedServiciuId,
     setSelectedFrizerId: setSelectedFrizerId,
     fetchFrizeriDispatch: fetchFrizeriDispatch,
+    setCurrentDayCalendarDispatch: setCurrentDayCalendarDispatch
+
 }, dispatch)
 
 export default connect(
