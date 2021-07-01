@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import {bindActionCreators} from "redux";
-import fetchServicii from "../store/Dispatch/FetchServicii";
-import setSelectedServiciuId from "../store/Dispatch/SetSelectedServiciuId";
-import setSelectedFrizerId from "../store/Dispatch/SetSelectedFrizerId";
-import fetchFrizeriDispatch from "../store/Dispatch/FetchFrizeriDispatch";
 import setCurrentDayCalendarDispatch from "../store/Dispatch/CurrentDayCalendarDispatch";
 import {connect} from "react-redux";
 

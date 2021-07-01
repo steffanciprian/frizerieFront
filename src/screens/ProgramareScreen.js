@@ -13,6 +13,7 @@ import Switch from "react-bootstrap/Switch";
 import HorizontalLabelPositionBelowStepper from '../components/HorizontalLabelPositionBelowStepper';
 import CalendarFrizer from "../components/Calendar";
 import setCurrentDayCalendarDispatch from '../store/Dispatch/CurrentDayCalendarDispatch'
+import setCurrentStepDispatch from "../store/Dispatch/CurrentStepDispatch";
 
 class ProgramareScreen extends Component {
     constructor(props) {
@@ -141,6 +142,7 @@ class ProgramareScreen extends Component {
 }
 
 const mapStateToProps = state => ({
+    currentStep: state.currentStepReducer.currentStep,
     error: state.fetchServiciiReducer.error,
     servicii: state.fetchServiciiReducer.servicii,
     loading: state.fetchServiciiReducer.loading,
@@ -155,7 +157,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     setSelectedServiciuId: setSelectedServiciuId,
     setSelectedFrizerId: setSelectedFrizerId,
     fetchFrizeriDispatch: fetchFrizeriDispatch,
-    setCurrentDayCalendarDispatch: setCurrentDayCalendarDispatch
+    setCurrentDayCalendarDispatch: setCurrentDayCalendarDispatch,
+    currentStepDispatch: setCurrentStepDispatch,
 
 }, dispatch)
 

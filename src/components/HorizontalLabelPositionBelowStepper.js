@@ -12,6 +12,9 @@ import {bindActionCreators} from "redux";
 import setCurrentStepDispatch from "../store/Dispatch/CurrentStepDispatch";
 import setSelectedServiciuId from "../store/Dispatch/SetSelectedServiciuId";
 import setSelectedFrizerId from "../store/Dispatch/SetSelectedFrizerId";
+import fetchServicii from "../store/Dispatch/FetchServicii";
+import fetchFrizeriDispatch from "../store/Dispatch/FetchFrizeriDispatch";
+import setCurrentDayCalendarDispatch from "../store/Dispatch/CurrentDayCalendarDispatch";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,11 +53,11 @@ function HorizontalLinearStepper(props) {
     const handleNext = () => {
         let {currentStep, selectedServiciuId, selectedFrizerId} = props;
         if (selectedServiciuId !== -1)
-            if(selectedFrizerId !== -1){
-            currentStep++;
-            props.currentStepDispatch(currentStep)
-            setActiveStep(currentStep);
-        }
+            if (selectedFrizerId !== -1) {
+                currentStep++;
+                props.currentStepDispatch(currentStep)
+                setActiveStep(currentStep);
+            }
         if (currentStep === 1 && selectedServiciuId !== -1)
             history.push('/programare/stylist')
         if (currentStep === 2 && selectedFrizerId !== -1)
@@ -119,12 +122,21 @@ function HorizontalLinearStepper(props) {
 const mapStateToProps = state => ({
     currentStep: state.currentStepReducer.currentStep,
     selectedServiciuId: state.setSelectedServiciuReducer.selectedServiciuId,
+    error: state.fetchServiciiReducer.error,
+    servicii: state.fetchServiciiReducer.servicii,
+    loading: state.fetchServiciiReducer.loading,
+    frizeri: state.fetchFrizeriReducer.frizeri,
+    selectedFrizerId: state.setSelectedFrizerIdReducer.selectedFrizerId,
+    currentDay: state.currentDayCalendarReducer.currentDay,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     currentStepDispatch: setCurrentStepDispatch,
     setSelectedServiciuId: setSelectedServiciuId,
-    setSelectedFrizerId:setSelectedFrizerId,
+    setSelectedFrizerId: setSelectedFrizerId,
+    fetchServicii: fetchServicii,
+    fetchFrizeriDispatch: fetchFrizeriDispatch,
+    setCurrentDayCalendarDispatch: setCurrentDayCalendarDispatch
 
 }, dispatch)
 
