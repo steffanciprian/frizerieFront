@@ -7,7 +7,6 @@ import {BrowserRouter} from "react-router-dom";
 import {Route, Switch} from "react-router";
 import PreturiScreen from "./screens/PreturiScreen";
 import NavbarComponent from "./components/NavbarComponent";
-import {Routes} from "./Routes";
 import Footer from "./components/Footer";
 import ProgramareScreen from "./screens/ProgramareScreen";
 import {applyMiddleware, combineReducers, createStore} from "redux";
@@ -35,12 +34,11 @@ const store = createStore(rootReducer, initialState, applyMiddleware(ReduxThunk)
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <NavbarComponent routes={Routes}/>
+            <NavbarComponent/>
             <Switch>
                 <Route exact path="/" component={App}/>
                 <Route exact path="/preturi" component={PreturiScreen}/>
                 <Route path="/programare" component={ProgramareScreen}/>
-                {/*<Route exact path="/programare/stylist" component={}*/}
             </Switch>
             <Footer/>
         </BrowserRouter>

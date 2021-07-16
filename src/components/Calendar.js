@@ -5,7 +5,6 @@ import {bindActionCreators} from "redux";
 import setCurrentDayCalendarDispatch from "../store/Dispatch/CurrentDayCalendarDispatch";
 import {connect} from "react-redux";
 
-
 class CalendarFrizer extends Component {
     constructor(props) {
         super(props);
@@ -15,8 +14,7 @@ class CalendarFrizer extends Component {
         const {currentDay} = this.props;
         console.log(this.props)
 
-        const onChange = (nextValue) =>
-        {
+        const onChange = (nextValue) => {
             this.props.setCurrentDayCalendarDispatch(nextValue)
         }
         return (
